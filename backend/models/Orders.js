@@ -67,21 +67,27 @@ const ordersSchema = new mongoose.Schema({
 }, {timestamps: true});
 
 // Middleware to set "updatedAt" before save 
-// ordersSchema.pre("save", function(next) {
-//     this.updatedAt = Date.now();
-//     next();
-// });
+ordersSchema.pre("save", function(next) {
+    this.updatedAt = Date.now();
+    next();
+});
 
 // Query middleware to execlude soft-deleted records
-// ordersSchema.pre(/^find/, function(next) {
-//     this.where({isDeleted: false});
-//     next()
-// });
+ordersSchema.pre(/^find/, function(next) {
+    this.where({isDeleted: false});
+    next()
+});
 
 //Methods for soft delete
 ordersSchema.methods.softDelete = function() {
     this.isDeleted = true;
     return this.save();
 };
+
+//methods for restoring soft deleted records (optinal)
+ordersSchema.methods.restore = function() {
+    this.isDeleted = false;
+    return this.save();
+}
 
 module.exports = mongoose.model("Orders", ordersSchema);

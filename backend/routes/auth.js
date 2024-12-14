@@ -131,27 +131,27 @@ router.post("/getuser",fetchuser(), async (req, res) => {
 // })
 
 // Route:4 Create an admin using: POST "api/auth/createadmin".
-// router.post("/createadmin", fetchuser, async(req, res) => {
-//     try{
-//         const loggedInUser = await User.findById(req.user.id);
-//         if(!loggedInUser || loggedInUser.role !== "admin") {
-//             return res.status(403).send("Access Denied: Only admins can create new admins");
-//         }
-//         const {name, email, password} = req.body;
-//         const salt = await bcrypt.genSalt(10);
-//         const secPass = await bcrypt.hash(password, salt);
+router.post("/createadmin", fetchuser("admin"), async(req, res) => {
+    try{
+        const loggedInUser = await User.findById(req.user.id);
+        if(!loggedInUser || loggedInUser.role !== "admin") {
+            return res.status(403).send("Access Denied: Only admins can create new admins");
+        }
+        const {name, email, password} = req.body;
+        const salt = await bcrypt.genSalt(10);
+        const secPass = await bcrypt.hash(password, salt);
 
-//         const newAdmin = await User.create({
-//             name,
-//             email,
-//             password: secPass,
-//             role: "admin",
-//         });
-//         res.status(201).json(newAdmin);
-//     } catch(error) {
-//         console.error(error.message);
-//         res.status(500).send("Internal Server Error");
-//     };
-// });
+        const newAdmin = await User.create({
+            name,
+            email,
+            password: secPass,
+            role: "admin",
+        });
+        res.status(201).json(newAdmin);
+    } catch(error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error");
+    };
+});
 
 module.exports = router

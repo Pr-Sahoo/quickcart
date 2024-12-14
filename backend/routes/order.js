@@ -34,7 +34,7 @@ router.post("/createorder", fetchuser(),[
 });
 
 // Route-2: Get all products for an Admin using: GET "api/orders/allorders".
-router.get("/allorders",fetchuser(), async(req, res) => {
+router.get("/allorders",fetchuser(), async(req, res) => {    // i can also pass here fetchuser("admin") but this process is not working yet
     try{
         const orders = await Order.find()
         .populate("userId", "name email")
@@ -60,8 +60,8 @@ router.get("/userorders", fetchuser(), async(req, res) => {
     }
 });
 
-// Route-4: Update an order status using: PUT "api/orders/updatestatus/:id".
-router.put("/updatestatus/:id", fetchuser(), [
+// Route-4: Update an order for an admin status using: PUT "api/orders/updatestatus/:id".
+router.put("/updatestatus/:id", fetchuser(), [   // Only admin can update orders  if you wanna use as a admin then use this fetchuser("admin"). but now this is not working
     body("status", "Status is required").notEmpty()
 ], async(req, res) => {
     const errors = validationResult(req);
@@ -87,7 +87,7 @@ router.put("/updatestatus/:id", fetchuser(), [
 });
 
 // Route-5: Delete an orders by it's id using DELETE "api/orders/deleteorder/:id".
-router.delete("/deleteorder/:id", fetchuser(), async(req, res) => {
+router.delete("/deleteorder/:id", fetchuser(), async(req, res) => {    // admin role but fetchuser("admin") is not working here so i have removed the fetchuser("admin") here 
     try {
         const order = await Order.findById(req.params.id);
 

@@ -32,7 +32,7 @@ const JWT_SECRET = "homelander$great";
 // module.exports = fetchuser;
 
 
-const fetchuser = () => {
+const fetchuser = (requiredRole = null) => {
     return (req, res, next) => {
         // Get the user form the jwt token and add id to the req object
         const token = req.header("auth-token");
@@ -42,6 +42,11 @@ const fetchuser = () => {
         try {
             const data = jwt.verify(token, JWT_SECRET);
             req.user = data.user;
+
+            // verification of the admin added now
+            if(requiredRole && req.user.role !== requiredRole) {
+                return res.status(403).send({error: "Access denied. Admins only"});
+            }
 
             next();
         } catch(error) {
