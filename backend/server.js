@@ -13,6 +13,10 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/products", require("./routes/product"));
 app.use("/api/orders", require("./routes/order"));
+app.get('/test', (req, res) => {
+  res.send({ message: 'Test route is working!' });
+});
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

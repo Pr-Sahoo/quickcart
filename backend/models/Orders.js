@@ -20,6 +20,8 @@
 
 const { type } = require("@testing-library/user-event/dist/type");
 const mongoose = require("mongoose");
+const User = require("./User");
+const Product = require("./Product");
 
 const ordersSchema = new mongoose.Schema({
     userId: {
@@ -31,7 +33,7 @@ const ordersSchema = new mongoose.Schema({
         {
             productId: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "Product",  // Reference to the product schema
+                ref: "Products",  // Reference to the product schema
                 required: true,
             },
             quantity: {

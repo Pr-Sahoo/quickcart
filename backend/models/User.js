@@ -16,11 +16,11 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    role: {
-        type: String,
-        default: "user",   // Default is user
-        enum: ["user", "admin"], // Restrict role to user and admin
-    }
+    // role: {
+    //     type: String,
+    //     default: "user",   // Default is user
+    //     enum: ["user", "admin"], // Restrict role to user and admin
+    // }
 },{timestamps: true});
 
-module.exports = mongoose.model("user", userSchema)
+module.exports = mongoose.model("User", userSchema)

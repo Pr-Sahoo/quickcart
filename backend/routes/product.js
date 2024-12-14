@@ -5,12 +5,12 @@ const fetchuser = require("../middleware/fetchuser");
 const { body, validationResult } = require("express-validator");
 
 // Route-1: create a new product using: POST "api/products/createproduct".
-router.post("/createproduct", fetchuser,[
+router.post("/createproduct", fetchuser(), [
     body("name", "Product Name is required").notEmpty(),
     body("description", "Product description is required").notEmpty(),
     body("price", "price must be a valid number").isNumeric(),
 ], async (req, res) => {
-    // console.log(req.body);
+    console.log(req.body);
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
         return res.status(400).json({errors: errors.array()});
@@ -44,7 +44,8 @@ router.get("/getproducts", async(req, res) => {
 });
 
 // Route-3: Get a product by its id using: GET "/api/products/product/:id".
-router.get("/product/:id",fetchuser, async(req, res) => {
+router.get("/product/:id",fetchuser(), async(req, res) => {
+    console.log(req.params.id);  // check the product id
     try{
         const product = await Product.findById(req.params.id);
         if(!product) {
@@ -58,7 +59,7 @@ router.get("/product/:id",fetchuser, async(req, res) => {
 });
 
 //Route-4: Update a product by its id using: PUT "/api/products/updateproduct/:id".
-router.put("/updateproduct/:id", fetchuser,[
+router.put("/updateproduct/:id", fetchuser(),[
     body("name", "Product name is required").notEmpty(),
     body("description", "Product description is required").notEmpty(),
     body("price", "Price must be a valid number").isNumeric(),
@@ -88,7 +89,7 @@ router.put("/updateproduct/:id", fetchuser,[
 });
 
 // Route-5: Delete a Product by its id using: DELETE "api/products/deleteproduct/:id".
-router.delete("/product/:id", fetchuser, async(req, res) => {
+router.delete("/product/:id", fetchuser(), async(req, res) => {
     try{
         let product = await Product.findByIdAndDelete(req.params.id);
         if(!product) {
@@ -101,5 +102,6 @@ router.delete("/product/:id", fetchuser, async(req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+
 
 module.exports = router;

@@ -10,7 +10,7 @@ var fetchuser = require("../middleware/fetchuser");
 const JWT_SECRET = "homelander$great";
 
 // Route1 - Create a User using: POST "/api/auth/createuser". no login required
-router.post("/createuser",[
+router.post("/createuser", [
     body("name", "Enter a valid name").isLength({min: 3}),
     body("email", "Enter a valid Email").isEmail(),
     body("password", "Password must be minimum 5 character").isLength({min: 5}),
@@ -87,17 +87,34 @@ router.post("/login",[
 });
 
 // Route-3: Get Loggedin user details using: POST "/api/auth/getuser". login required.
-router.post("/getuser", fetchuser, async (req, res) => {
+// router.post("/getuser", fetchuser, async (req, res) => {
 
-    try{
-        userId = req.user.id;
-        const user = await User.findById(userId).select("-password")
-        res.send(user)
-    } catch(error) {
-        console.error(error.message);
+//     try{
+//         userId = req.user.id;
+//         const user = await User.findById(userId).select("-password")
+//         res.send(user)
+//     } catch(error) {
+//         console.error(error.message);
+//         res.status(500).send("Internal Server Error");
+//     }
+// }),
+
+router.post("/getuser",fetchuser(), async (req, res) => {
+    try {
+        console.log("Request user ID:", req.user.id);
+        const user = await User.findById(req.user.id).select("-password");
+        if (!user) {
+            console.log("User not found");
+            return res.status(404).send("User not found");
+        }
+        console.log("User data retrieved:", user);
+        res.send(user);
+    } catch (error) {
+        console.error("Error in getuser route:", error.message);
         res.status(500).send("Internal Server Error");
     }
-}),
+});
+
 
 // Route:4 Create an admin using: POST "api.auth/createadmin".
 // router.post("/createadmin", fetchadmin, async(req, res) => {
@@ -114,27 +131,27 @@ router.post("/getuser", fetchuser, async (req, res) => {
 // })
 
 // Route:4 Create an admin using: POST "api/auth/createadmin".
-router.post("/createadmin", fetchuser, async(req, res) => {
-    try{
-        const loggedInUser = await User.findById(req.user.id);
-        if(!loggedInUser || loggedInUser.role !== "admin") {
-            return res.status(403).send("Access Denied: Only admins can create new admins");
-        }
-        const {name, email, password} = req.body;
-        const salt = await bcrypt.genSalt(10);
-        const secPass = await bcrypt.hash(password, salt);
+// router.post("/createadmin", fetchuser, async(req, res) => {
+//     try{
+//         const loggedInUser = await User.findById(req.user.id);
+//         if(!loggedInUser || loggedInUser.role !== "admin") {
+//             return res.status(403).send("Access Denied: Only admins can create new admins");
+//         }
+//         const {name, email, password} = req.body;
+//         const salt = await bcrypt.genSalt(10);
+//         const secPass = await bcrypt.hash(password, salt);
 
-        const newAdmin = await User.create({
-            name,
-            email,
-            password: secPass,
-            role: "admin",
-        });
-        res.status(201).json(newAdmin);
-    } catch(error) {
-        console.error(error.message);
-        res.status(500).send("Internal Server Error");
-    };
-});
+//         const newAdmin = await User.create({
+//             name,
+//             email,
+//             password: secPass,
+//             role: "admin",
+//         });
+//         res.status(201).json(newAdmin);
+//     } catch(error) {
+//         console.error(error.message);
+//         res.status(500).send("Internal Server Error");
+//     };
+// });
 
 module.exports = router
