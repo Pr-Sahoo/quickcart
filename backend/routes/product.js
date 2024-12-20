@@ -9,6 +9,7 @@ router.post("/createproduct", fetchuser(), [
     body("name", "Product Name is required").notEmpty(),
     body("description", "Product description is required").notEmpty(),
     body("price", "price must be a valid number").isNumeric(),
+    body("imageURL", "Invalid image URL").optional().isURL()
 ], async (req, res) => {
     console.log(req.body);
     const errors = validationResult(req);
