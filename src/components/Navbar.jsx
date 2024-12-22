@@ -26,7 +26,7 @@ function NavScrollExample() {
                                 Grocery
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action5">
+                            <NavDropdown.Item href="/cart-manage">
                                 Electronics and Accessories
                             </NavDropdown.Item>
                         </NavDropdown>
