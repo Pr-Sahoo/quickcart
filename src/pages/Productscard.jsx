@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 import axiosInstance from '../utils/axiosInstance';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import axios from 'axios';
 
 const Productscard = () => {
   const [products, setProducts] = useState([]);
   const [hovered, setHovered] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -22,8 +24,57 @@ const Productscard = () => {
   const cardStyle = (isHovered) => ({
     boxShadow: isHovered ? "0 4px 8px rgba(0, 0, 0, 0.2)" : "none",
     transform: isHovered ? "scale(1.02)" : "scale(1)",
-    transition:  "all 0.3s ease-in-out"
+    transition: "all 0.3s ease-in-out"
   });
+
+  // Handle quantity change 
+  const handleQuantityChange = (e) => {
+    const value = Math.max(1, parseInt(e.target.value) || 1)  // ensure the quantity is atleast one
+    setQuantity(value);
+  }
+  // Add Product to cart and add new product to cart via api hit
+  const AuthToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc1ODRjZDRmZmYyMjZjOWM4YmQxZTUyIn0sImlhdCI6MTczMzg0MjI3Mn0.siea1paPa3f268yRNjfrx6biXowIlsliluhp8aE1pbY";
+  const handleAddToCart = async (product) => {
+    // const orderData = {
+    //   productId: product._id,
+    //   // name: product.name,
+    //   price: product.price,
+    //   quantity,
+    //   totalAmount: product.price * quantity
+    // };
+    const orderData = {  // this order data is created by the co pilot 
+      products: [
+        {
+          productId: product._id,
+          quantity,
+        },
+      ],
+      totalAmount: product.price * quantity,
+    };
+    try {
+      //Api call to create order
+      const response = await axios.post("http://localhost:5000/api/orders/createorder", orderData, {
+        headers: {
+          // "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc1ODRjZDRmZmYyMjZjOWM4YmQxZTUyIn0sImlhdCI6MTczMzg0MjI3Mn0.siea1paPa3f268yRNjfrx6biXowIlsliluhp8aE1pbY",
+          "auth-token" : AuthToken
+        }
+      });
+      if(response.status === 201) {
+        alert(`${product.name} added to your cart. Quantity: ${quantity}. Order created successfully`);
+      } else {
+        console.error("error response: ", response.status, response.data); // log the response status and data
+        alert("Something went wrog while creating the Order");
+      }
+    } catch (error) {
+        // console.error("Failed to create order: ", error);
+        alert("Failed to create order please try again");
+        if(error.response) {
+          console.error("Error creating order: ", error.response.data);
+        }else {
+          console.error("error creating order: ", error.message);
+        }
+    }
+  }
 
   return (
     <div className="container">
@@ -38,7 +89,13 @@ const Productscard = () => {
                 <Card.Text>{products.description}</Card.Text>
                 <Card.Text><strong>Price: &#8377;</strong> {products.price}</Card.Text>
                 <Card.Text><strong>Category: </strong>{products.category}</Card.Text>
-                <Button variant="primary">Buy now</Button>
+
+                {/* Quantity selector */}
+                <div className="mb-2">
+                  <label htmlFor="quantity" className='mr-2'>Quantity:</label>
+                  <input type='number' value={quantity} onChange={handleQuantityChange} min={1} className='form-control' style={{width: "60px", display: "inline-block"}}/>
+                </div>
+                <Button variant="primary" onClick={() => handleAddToCart(products)}>Buy now</Button>
               </Card.Body>
             </Card>
           </div>
