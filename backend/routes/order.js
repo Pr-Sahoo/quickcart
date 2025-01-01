@@ -6,6 +6,7 @@ const fetchuser = require("../middleware/fetchuser");
 const {body, validationResult} = require("express-validator");
 // const isAdmin = require("../middleware/isAdmin")
 const { route } = require("./product");
+const Product = require("../models/Product");
 
 // Route-1: Create a new order using: POST "/api/orders/createorder".
 router.post("/createorder", fetchuser(),[
@@ -19,6 +20,16 @@ router.post("/createorder", fetchuser(),[
 
     try {
         const {products, totalAmount} = req.body;
+
+        //Validate if each productId exist in the database
+        for(i = 0; i< products.length; i++) {
+            const product = await Product.findById(products[i].productId);
+            if(!product) {
+                return res.status(400).json({message: `Product with ID ${products[i].productId} not found`});
+
+            }
+        }
+
         const order = new Order({
             userId: req.user.id,
             products,
@@ -38,7 +49,7 @@ router.get("/allorders",fetchuser(), async(req, res) => {    // i can also pass 
     try{
         const orders = await Order.find()
         .populate("userId", "name email")
-        .populate("products.productId", "name price");
+        .populate("products.productId", "name price imageURL"); // Ensure productId is populated properly
         res.json(orders)
     } catch(error) {
         console.error(error.message);

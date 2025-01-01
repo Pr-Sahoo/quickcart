@@ -10,7 +10,7 @@ function NavScrollExample() {
     return (
         <Navbar expand="lg" bg='dark' data-bs-theme='dark' className="bg-body-tertiary">
             <Container fluid>
-                <Navbar.Brand href="#">Quick Cart</Navbar.Brand>
+                <Navbar.Brand href="/page">Quick Cart</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -19,7 +19,7 @@ function NavScrollExample() {
                         navbarScroll
                     >
                         <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/about">About</Nav.Link>
+                        <Nav.Link href="/page">About</Nav.Link>
                         <NavDropdown title="Category" id="navbarScrollingDropdown">
                             <NavDropdown.Item href="/create-product">Top deals</NavDropdown.Item>
                             <NavDropdown.Item href="/product-list">
