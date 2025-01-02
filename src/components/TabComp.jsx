@@ -5,6 +5,7 @@ import Deleteprod from '../pages/Deleteprod';
 import Page from '../pages/Page';
 import CreateProduct from '../pages/Creationprod';
 import AllOrders from '../pages/AllOrders';
+import AuthPage from '../pages/AuthPage';
 
 function JustifiedExample() {
   return (
@@ -25,6 +26,9 @@ function JustifiedExample() {
       </Tab>
       <Tab eventKey="all-orders" title="All Orders">
         <AllOrders/> 
+      </Tab>
+      <Tab eventKey="auth-page" title="Auth Page">
+        <AuthPage/>
       </Tab>
       <Tab eventKey="contact" title="Contact" disabled>
         Tab content for Contact

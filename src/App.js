@@ -13,6 +13,7 @@ import Deleteprod from './pages/Deleteprod';
 import Page from './pages/Page';
 import { BasketProvider } from './context/BasketContext';
 import AllOrders from './pages/AllOrders';
+import AuthPage from './pages/AuthPage';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <Route path='/delete-prod' element={<Deleteprod />} />
               <Route path='/page' element={<Page />} />
               <Route path='/all-orders' element={<AllOrders/>} />
+              <Route path='/auth-page' element={<AuthPage/>} />
               {/* if the page not found 404 optional*/}
               <Route path='*' element={<h1>Page not found</h1>} />
             </Routes>
