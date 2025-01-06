@@ -7,13 +7,14 @@ import NavScrollExample from './components/Navbar';
 import CartState from './context/cartState';
 import CreateProduct from './pages/Creationprod';
 import ProductList from './pages/Products';
-import TabComp from './components/TabComp'
+// import TabComp from './components/TabComp'
 import Productscard from './pages/Productscard';
 import Deleteprod from './pages/Deleteprod';
 import Page from './pages/Page';
 import { BasketProvider } from './context/BasketContext';
 import AllOrders from './pages/AllOrders';
 import AuthPage from './pages/AuthPage';
+import Footer from './pages/Footer';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         <BasketProvider>
           <Router>
             <NavScrollExample />
-            <TabComp />
+            {/* <TabComp /> */}
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/about' element={<About />} />
@@ -36,6 +37,7 @@ function App() {
               {/* if the page not found 404 optional*/}
               <Route path='*' element={<h1>Page not found</h1>} />
             </Routes>
+            <Footer />
           </Router>
         </BasketProvider>
       </CartState>

@@ -10,7 +10,7 @@ import AuthPage from '../pages/AuthPage';
 function JustifiedExample() {
   return (
     <Tabs
-      defaultActiveKey="profile"
+      defaultActiveKey="home"
       id="justify-tab-example"
       className="mb-3"
       justify
@@ -18,21 +18,21 @@ function JustifiedExample() {
       <Tab eventKey="home" title="Home">
         <Productscard/>
       </Tab>
-      <Tab eventKey="profile" title="Profile">
-        <Deleteprod/>
-      </Tab>
-      <Tab eventKey="longer-tab" title="Loooonger Tab">
+      <Tab eventKey="longer-tab" title="Your Cart">
         <Page/>
       </Tab>
       <Tab eventKey="all-orders" title="All Orders">
         <AllOrders/> 
       </Tab>
+      <Tab eventKey="profile" title="Manage Products">
+        <Deleteprod/>
+      </Tab>
       <Tab eventKey="auth-page" title="Auth Page">
         <AuthPage/>
       </Tab>
-      <Tab eventKey="contact" title="Contact" disabled>
+      {/* <Tab eventKey="contact" title="Contact" disabled>
         Tab content for Contact
-      </Tab>
+      </Tab> */}
       <Tab eventKey="create-product" title="crt-product">
         <CreateProduct/>
       </Tab>

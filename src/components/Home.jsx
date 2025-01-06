@@ -1,11 +1,16 @@
-import React, { useContext } from 'react';
-import CartContext from '../context/cartContext';
+// import React, { useContext } from 'react';
+import React from 'react';
+// import CartContext from '../context/cartContext';
+// import Productscard from '../pages/Productscard';
+import TabComp from './TabComp'
 
 export const Home = () => {
-  const {name, frnd, pass, age} = useContext(CartContext);
+  // const {name, frnd, pass, age} = useContext(CartContext);
   return (
-    <div>this is home page 
-      i am the {name} and my friend is {frnd} and we are both {age} yr old and we both {pass} in our exam 
+    <div>
+      {/* <h3 className='text-center'>Welcome to QuickCart</h3> */}
+      {/* <Productscard /> */}
+      <TabComp/>
     </div>
   )
 }
