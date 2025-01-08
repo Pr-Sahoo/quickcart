@@ -1,22 +1,3 @@
-// const mongoose = require("mongoose");
-// const User = require("./User");
-// const { type } = require("@testing-library/user-event/dist/type");
-// const Product = require("./Product");
-
-// const ordersSchema = new mongoose.Schema({
-//     userId: {type: mongoose.Schema.Types.ObjectId, ref: "user", required: true},
-//     products: [{type: mongoose.Schema.ObjectId, quantity: Number}],
-//     totalAmount: {
-//         type: Number,
-//         required: true
-//     },
-//     status: {
-//         type: String,
-//         default: "Pending"
-//     }
-// });
-
-// module.exports = ("orders", ordersSchema);
 
 const { type } = require("@testing-library/user-event/dist/type");
 const mongoose = require("mongoose");

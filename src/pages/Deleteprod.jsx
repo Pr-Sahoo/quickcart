@@ -28,10 +28,6 @@ const Deleteprod = () => {
         }
         fetchProducts();
     }, []);
-    // "http://localhost:5000/api/products/createproduct", formdata, {
-    //             headers: {
-    //                 "auth-token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc1YWE5ODhlODc4ZmZmMmMzZTJiMWIwIn0sImlhdCI6MTczNDAwMDMxMH0.O5Hh1vbYavl2lApBkLTQ-wngqHvTlwuFAjCLULQ8doE",
-    //             },
 
     //Function to delete a product 
     const handleDelete = async (productId) => {
@@ -93,30 +89,6 @@ const Deleteprod = () => {
     };
 
     return (
-        // <div className="container mt-5">
-        //     <h2 className='mb-4'>Delete Products</h2>
-        //     {error && <div className='alert alert-danger'>{error}</div>}
-        //     <Table striped bordered hover>
-        //         <thead>
-        //             <th>#</th>
-        //             <th>Name</th>
-        //             <th>Description</th>
-        //             <th>Price</th>
-        //             <th>Actions</th>
-        //         </thead>
-        //         <tbody>
-        //             {products.map((product, index) => (
-        //                 <tr key={product._id}>
-        //                     <td>{index + 1}</td>
-        //                     <td>{product.name}</td>
-        //                     <td>{product.description}</td>
-        //                     <td>&#8377; {product.price}</td>
-        //                     <td><Button variant="danger" onClick={() => handleDelete(product._id)}>Delete</Button></td>
-        //                 </tr>
-        //             ))}
-        //         </tbody>
-        //     </Table>
-        // </div>
         <div className="container mt-5">
             <h2 className='mb-4'>Manage Products</h2>
             {error && <div className="alert alert-danger">{error}</div>}
