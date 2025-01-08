@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -8,7 +9,24 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link,  useNavigate } from 'react-router-dom';
 
 function NavScrollExample() {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isNewUser, setIsNewUser] = useState(false); // track if the user is new
     const navigate = useNavigate();
+
+    //Check Authentication status on mount
+    useEffect(() => {
+        const token = localStorage.getItem("auth-token");
+        setIsAuthenticated(!!token);
+    },[]);
+
+    //Handle Logout
+    const handleLogOut = () => {
+        localStorage.removeItem("auth-token");
+        setIsAuthenticated(false);
+        setIsNewUser(false);
+        navigate("/");
+    };
+
     return (
         <Navbar expand="lg" bg='dark' data-bs-theme='dark' className="bg-body-tertiary">
             <Container fluid>
@@ -21,7 +39,7 @@ function NavScrollExample() {
                         navbarScroll
                     >
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
-                        <Nav.Link href="/page">Cart<i class="fa-solid fa-cart-shopping"></i></Nav.Link>
+                        <Nav.Link as={Link} to="/page">Cart<i className="fa-solid fa-cart-shopping"></i></Nav.Link>
                         <Nav.Link as={Link} to="/create-product">Create Product</Nav.Link>
                         <Nav.Link as={Link} to="/delete-prod">Delete Product</Nav.Link>
                         <NavDropdown title="Management" id="navbarScrollingDropdown">
@@ -47,7 +65,23 @@ function NavScrollExample() {
                         />
                         <Button variant="outline-success">Search</Button>
                     </Form>
-                    <Button variant="outline-primary" className='ms-3' onClick={() => navigate("/auth-page")}>Login</Button>
+                    {/* <Button variant="outline-primary" className='ms-3' onClick={() => navigate("/auth-page")}>Login</Button> */}
+
+                    {/* Conditional redering of buttons */}
+                    {!isAuthenticated && !isNewUser  && (
+                        <>
+                        <Button variant='outline-primary' className='ms-3' onClick={() => navigate("/auth-page")}>Login</Button>
+                        <Button variant='outline-secondary' className='ms-3' onClick={() => setIsNewUser(true)}>SignUp</Button> 
+                        </>
+                    )}
+
+                    {isNewUser && (
+                        <Button variant='outline-secondary' className='ms-3' onClick={() => navigate("/sign-up")}>SignUp</Button>
+                    )}
+
+                    {isAuthenticated && (
+                        <Button variant='outline-danger' className='ms-3' onClick={handleLogOut}>LogOut</Button>
+                    )}
                 </Navbar.Collapse>
             </Container>
         </Navbar>

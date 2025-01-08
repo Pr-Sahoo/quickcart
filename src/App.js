@@ -15,6 +15,8 @@ import { BasketProvider } from './context/BasketContext';
 import AllOrders from './pages/AllOrders';
 import AuthPage from './pages/AuthPage';
 import Footer from './pages/Footer';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
               <Route path='/page' element={<Page />} />
               <Route path='/all-orders' element={<AllOrders/>} />
               <Route path='/auth-page' element={<AuthPage/>} />
+              <Route path='/sign-up' element={<SignUp/>} />
+              <Route path='/login' element={<Login />} />
               {/* if the page not found 404 optional*/}
               <Route path='*' element={<h1>Page not found</h1>} />
             </Routes>
