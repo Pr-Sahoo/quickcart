@@ -1,5 +1,8 @@
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = "homelander$great";
+// require("dotenv").config();
+
+// const JWT_SECRET = process.env.JWT_SECRET;
 
 const fetchuser = (requiredRole = null) => {
     return (req, res, next) => {
