@@ -12,7 +12,8 @@ const SignUp = () => {
     const handleSignUp = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:5000/api/auth/createuser", {
+            // const response = await axios.post("http://localhost:5000/api/auth/createuser", {
+            const response = await axios.post("https://quickcart-backend-5qqz.onrender.com/api/auth/createuser", {
                 name,
                 email,
                 password,

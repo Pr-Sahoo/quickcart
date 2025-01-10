@@ -27,7 +27,8 @@ const Page = () => {
         console.log(orderData);
         try {
             // const response = await axiosInstance.post("/orders/createorder", orderData);
-            const response = await axios.post("http://localhost:5000/api/orders/createorder", orderData, {
+            // const response = await axios.post("http://localhost:5000/api/orders/createorder", orderData, {
+            const response = await axios.post("https://quickcart-backend-5qqz.onrender.com/api/orders/createorder", orderData, {
                 headers: {
                     "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc1ODRjZDRmZmYyMjZjOWM4YmQxZTUyIn0sImlhdCI6MTczMzg0MjI3Mn0.siea1paPa3f268yRNjfrx6biXowIlsliluhp8aE1pbY",
                 },

@@ -2,7 +2,8 @@ import axios from "axios";
 
 // axios instance creation
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:5000/api',
+    // baseURL: 'http://localhost:5000/api',
+    baseURL: 'https://quickcart-backend-5qqz.onrender.com/api',
     // timeout: 5000  //seting timout for the request
 });
 

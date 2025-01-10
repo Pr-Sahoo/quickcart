@@ -33,7 +33,8 @@ const Deleteprod = () => {
     const handleDelete = async (productId) => {
         try {
             // const response = await axiosInstance.delete(`/products/product/${productId}`);
-            const response = await axios.delete(`http://localhost:5000/api/products/product/${productId}`, {
+            // const response = await axios.delete(`http://localhost:5000/api/products/product/${productId}`, {
+            const response = await axios.delete(`https://quickcart-backend-5qqz.onrender.com/api/products/product/${productId}`, {
                 headers: {
                     "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc1YWE5ODhlODc4ZmZmMmMzZTJiMWIwIn0sImlhdCI6MTczNDAwMDMxMH0.O5Hh1vbYavl2lApBkLTQ-wngqHvTlwuFAjCLULQ8doE",
                 },

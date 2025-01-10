@@ -13,31 +13,16 @@ const CreateProduct = () => {
 
     const [message, setMessage] = useState("");
 
-    // const handleChange = (e) => {
-    //     setFormdata({
-    //         ...formdata,
-    //         [e.target.name]: e.target.value,
-    //     });
-    // };
     const handleChange = (e) => {
         const {name, value} = e.target;
         setFormdata((prev) => ({...prev, [name]: value}));
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         const response = await axiosInstance.post("/products/createproduct", formdata);
-    //         alert("product created successfully");
-    //         console.log(response.data);
-    //     } catch(error) {
-    //         console.error("Error creating product: ", error);
-    //     }
-    // };
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-            const res = await axios.post("http://localhost:5000/api/products/createproduct", formdata, {
+            // const res = await axios.post("http://localhost:5000/api/products/createproduct", formdata, {
+            const res = await axios.post("https://quickcart-backend-5qqz.onrender.com/api/products/createproduct", formdata, {
                 headers: {
                     "auth-token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc1YWE5ODhlODc4ZmZmMmMzZTJiMWIwIn0sImlhdCI6MTczNDAwMDMxMH0.O5Hh1vbYavl2lApBkLTQ-wngqHvTlwuFAjCLULQ8doE",
                 },

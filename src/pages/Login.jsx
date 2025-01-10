@@ -11,7 +11,8 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:5000/api/auth/login", {email, password});
+            // const response = await axios.post("http://localhost:5000/api/auth/login", {email, password});
+            const response = await axios.post("https://quickcart-backend-5qqz.onrender.com/api/auth/login", {email, password});
             localStorage.setItem("auth-token", response.data.authtoken);
             setMessage({type: "success", text: "Login successfully"});
         } catch (error) {

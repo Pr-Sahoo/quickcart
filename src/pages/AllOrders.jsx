@@ -17,7 +17,8 @@ const AllOrders = () => {
     const fetchOrders = async () => {
         setLoading(true);
         try {
-            const response = await axios.get("http://localhost:5000/api/orders/allorders", {
+            // const response = await axios.get("http://localhost:5000/api/orders/allorders", {
+            const response = await axios.get("https://quickcart-backend-5qqz.onrender.com/api/orders/allorders", {
                 // headers: { "auth-token": localStorage.getItem("auth-token") },
                 headers: {"auth-token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc1ODRjZDRmZmYyMjZjOWM4YmQxZTUyIn0sImlhdCI6MTczMzg0MjI3Mn0.siea1paPa3f268yRNjfrx6biXowIlsliluhp8aE1pbY"},
             });
@@ -34,7 +35,8 @@ const AllOrders = () => {
     // Delete order 
     const deleteOrder = async (orderId) => {
         try {
-            await axios.delete(`http://localhost:5000/api/orders/deleteorder/${orderId}`, {
+            // await axios.delete(`http://localhost:5000/api/orders/deleteorder/${orderId}`, {
+            await axios.delete(`https://quickcart-backend-5qqz.onrender.com/api/orders/deleteorder/${orderId}`, {
                 // headers: { "auth-token": localStorage.getItem("auth-token") },
                 headers: {"auth-token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjc1ODRjZDRmZmYyMjZjOWM4YmQxZTUyIn0sImlhdCI6MTczMzg0MjI3Mn0.siea1paPa3f268yRNjfrx6biXowIlsliluhp8aE1pbY"},
             });
@@ -49,7 +51,8 @@ const AllOrders = () => {
     // Update order status
     const updateOrderStatus = async () => {
         try {
-            await axios.put(`http://localhost:5000/api/orders/updatestatus/${selectedOrders._id}`,
+            // await axios.put(`http://localhost:5000/api/orders/updatestatus/${selectedOrders._id}`,
+            await axios.put(`https://quickcart-backend-5qqz.onrender.com/api/orders/updatestatus/${selectedOrders._id}`, 
                 { status: newStatus },
                 {
                     // headers: { "auth-token": localStorage.getItem("auth-token") },
