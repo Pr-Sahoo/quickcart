@@ -1,5 +1,5 @@
 
-const { type } = require("@testing-library/user-event/dist/type");
+// const { type } = require("@testing-library/user-event/dist/type");
 const mongoose = require("mongoose");
 const User = require("./User");
 const Product = require("./Product");
