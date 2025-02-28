@@ -51,9 +51,10 @@ const Productscard = () => {
     <div className="container mx-auto my-4">
       <h1 className='text-center'>Welcome to QuickCart</h1>
       <h2 className='text-center mb-4'>Product list</h2>
-      <div className="row d-flex justify-content-center flex-wrap g-4">
+      {/* <div className="row d-flex justify-content-center flex-wrap g-4"> */}
+      <div className='row justify-content-center g-4'>
         {products.map((products) =>
-          <div className="col-sm-6 col-md-4 col-mg-3" key={products._id} onMouseEnter={() => setHovered(products._id)} onMouseLeave={() => setHovered(null)} >
+          <div className="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center" key={products._id} onMouseEnter={() => setHovered(products._id)} onMouseLeave={() => setHovered(null)} >
             <Card style={{ ...cardStyle(hovered === products._id), width: '18rem' }} className='h-100'>
               <Card.Img variant="top" src={products.imageURL} alt={products.name} style={{ height: "200px", objectFit: "cover" }} />
               <Card.Body>
